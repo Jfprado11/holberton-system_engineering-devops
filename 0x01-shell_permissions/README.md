@@ -1,2 +1,2 @@
-_Permissions_
-learning permision in shell Linux day 3
+_permission_
+start working and learning how permission works
