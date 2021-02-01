@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -lR | grep -c ^d
+ls -1A | grep -c ^d
