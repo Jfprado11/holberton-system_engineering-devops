@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -lAR | grep ^d
+ls -lA | grep ^d
