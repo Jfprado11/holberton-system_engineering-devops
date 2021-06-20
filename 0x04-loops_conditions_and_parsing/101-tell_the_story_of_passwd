@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+# using read and cut
+file=/etc/passwd
+while IFS= read -r line
+do
+    USERNAME=$(echo "$line" | cut -f1 -d":")
+    GROUP_ID=$(echo "$line" | cut -f4 -d":")
+    HOME_DIRECTORY=$(echo "$line" | cut -f6 -d":")
+    COMMAND=$(echo "$line" | cut -f7 -d":")
+    USER=$(echo "$line" | cut -f3 -d":")
+    PASSWORD=$(echo "$line" | cut -f2 -d":")
+    INFO=$(echo "$line" | cut -f5 -d":")
+    echo "The user $USERNAME is part of the $GROUP_ID gang, lives in $HOME_DIRECTORY and rides $COMMAND. $USER's place is protected by the passcode $PASSWORD, more info about the user here: $INFO"
+done < "$file"
