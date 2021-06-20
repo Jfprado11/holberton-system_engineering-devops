@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# using read and cut
+file=/etc/passwd
+while IFS= read -r line
+do
+    hey=$(echo "$line" | cut -f1 -d":")
+    does=$(echo "$line" | cut -f3 -d ":")
+    last=$(echo "$line" | cut -f6 -d":")
+    echo -n "$hey:$does"
+    echo ":$last"
+done < "$file"
