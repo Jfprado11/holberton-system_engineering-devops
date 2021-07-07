@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# program that checks for the open ports
+netstat -l --program
