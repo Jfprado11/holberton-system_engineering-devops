@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# debuging second challenge
+sed -i -e '/listen 8080 default_server;/s/8080/80/' /etc/nginx/sites-enabled/default
+sed -i '22d' /etc/nginx/sites-enabled/default
+string="listen [::]:80 default_server ipv6only=on;"
+sed -i "22i $string" /etc/nginx/sites-enabled/default
+service nginx restart
