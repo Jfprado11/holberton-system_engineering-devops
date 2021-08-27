@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# checks some info for the created subdomains
+domain=$1
+if ! [[ $2 ]]
+then
+    www="www."$domain
+    load="lb-01."$domain
+    ser_1="web-01."$domain
+    ser_2="web-02."$domain
+    arr=($www $load $ser_1 $ser_2)
+    for value in "${arr[@]}"
+    do
+        info=$(dig $value | grep -A1 'ANSWER SECTION:')
+        record=$(echo $info | awk '{ print $7}')
+        ip_adress=$(echo $info | awk '{ print $8}')
+        echo "The subdomain $value is a $record record and points to $ip_adress"
+    done
+else
+    subdomain=$2"."$domain
+    info=$(dig $subdomain | grep -A1 'ANSWER SECTION:')
+    record=$(echo $info | awk '{ print $7}')
+    ip_adress=$(echo $info | awk '{ print $8}')
+    echo "The subdomain $subdomain is a $record record and points to $ip_adress"
+fi
