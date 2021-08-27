@@ -3,22 +3,37 @@
 domain=$1
 if ! [[ $2 ]]
 then
+    # for WWW
     www="www."$domain
+    info=$(dig $www | grep -A1 'ANSWER SECTION:')
+    record=$(echo $info | awk '{ print $7}')
+    ip_adress=$(echo $info | awk '{ print $8}')
+    echo "The subdomain www is a $record record and points to $ip_adress"
+
+    #for LB-01
     load="lb-01."$domain
+    info=$(dig $load | grep -A1 'ANSWER SECTION:')
+    record=$(echo $info | awk '{ print $7}')
+    ip_adress=$(echo $info | awk '{ print $8}')
+    echo "The subdomain lb-01 is a $record record and points to $ip_adress"
+
+    # for WEB-01
     ser_1="web-01."$domain
+    info=$(dig $ser_1 | grep -A1 'ANSWER SECTION:')
+    record=$(echo $info | awk '{ print $7}')
+    ip_adress=$(echo $info | awk '{ print $8}')
+    echo "The subdomain web-01 is a $record record and points to $ip_adress"
+
+    # for WEB-02
     ser_2="web-02."$domain
-    arr=($www $load $ser_1 $ser_2)
-    for value in "${arr[@]}"
-    do
-        info=$(dig $value | grep -A1 'ANSWER SECTION:')
-        record=$(echo $info | awk '{ print $7}')
-        ip_adress=$(echo $info | awk '{ print $8}')
-        echo "The subdomain $value is a $record record and points to $ip_adress"
-    done
+    info=$(dig $ser_2 | grep -A1 'ANSWER SECTION:')
+    record=$(echo $info | awk '{ print $7}')
+    ip_adress=$(echo $info | awk '{ print $8}')
+    echo "The subdomain web-02 is a $record record and points to $ip_adress"
 else
     subdomain=$2"."$domain
     info=$(dig $subdomain | grep -A1 'ANSWER SECTION:')
     record=$(echo $info | awk '{ print $7}')
     ip_adress=$(echo $info | awk '{ print $8}')
-    echo "The subdomain $subdomain is a $record record and points to $ip_adress"
+    echo "The subdomain $2 is a $record record and points to $ip_adress"
 fi
