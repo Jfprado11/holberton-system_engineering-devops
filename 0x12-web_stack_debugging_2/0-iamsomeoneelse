@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# using teh whoaim
+su $1
+whoami
