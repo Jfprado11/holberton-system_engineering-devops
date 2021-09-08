@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # usign the devops
 pkil -f apache2
-sudo chmod 755 /etc/nginx/nginx.conf
 sed -i "s/80/8080/g" /etc/nginx/sites-enabled/default
 sudo -u nginx service nginx start
