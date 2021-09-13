@@ -28,4 +28,4 @@ if __name__ == "__main__":
 
     print(text)
     for todo in todos_ready:
-        print(" \t{}".format(todo["title"]))
+        print("\t {}".format(todo["title"]))
