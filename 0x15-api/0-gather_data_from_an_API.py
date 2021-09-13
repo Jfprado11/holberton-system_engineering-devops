@@ -11,12 +11,13 @@ if __name__ == "__main__":
         "https://jsonplaceholder.typicode.com/users/{}".format(person))
 
     user = info.json()
+    false_value = {"userId": user["id"], "completed": "false"}
     todos_false = requests.get(
-        "https://jsonplaceholder.typicode.com/todos/?userId={}&completed=false".format(
-            user["id"]))
+        "https://jsonplaceholder.typicode.com/todos/", params=false_value)
 
-    todos_ready = requests.get("https://jsonplaceholder.typicode.com/todos/?userId={}&completed=true".format(
-        user["id"]))
+    ready_value = {"userId": user["id"], "completed": "true"}
+    todos_ready = requests.get(
+        "https://jsonplaceholder.typicode.com/todos/", params=ready_value)
 
     todos_false = todos_false.json()
     todos_ready = todos_ready.json()
