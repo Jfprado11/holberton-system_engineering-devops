@@ -23,7 +23,7 @@ if __name__ == "__main__":
     todos_ready = todos_ready.json()
     todos = len(todos_false) + len(todos_ready)
 
-    text = "Employee {} is done with tasks ({}/{}):".format(
+    text = "Employee {} is done with tasks({}/{}):".format(
         user["name"], len(todos_ready), todos)
 
     print(text)
