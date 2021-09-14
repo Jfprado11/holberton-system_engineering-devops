@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     todos = todos.json()
 
-    with open("{}.csv".format(user["id"]), "w") as file:
+    with open("{}.csv".format(user["id"]), "w", newline="") as file:
         writer = csv.writer(file)
 
         for todo in todos:
