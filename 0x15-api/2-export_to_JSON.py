@@ -20,9 +20,9 @@ if __name__ == "__main__":
 
     data = []
     for todo in todos:
-        data.append([{"task": todo["title"],
+        data.append({"task": todo["title"],
                      "completed": todo["completed"],
-                      "username": user["username"]}])
+                     "username": user["username"]})
     datas = {user["id"]: data}
 
     with open("{}.json".format(user["id"]), "w", newline="") as file:
