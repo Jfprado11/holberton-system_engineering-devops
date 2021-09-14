@@ -18,8 +18,8 @@ if __name__ == "__main__":
 
     todos = todos.json()
 
-    with open("{}.csv".format(user["id"]), "w") as file:
-        writer = csv.writer(file)
+    with open("{}.csv".format(user["id"]), "w", newline="") as file:
+        writer = csv.writer(file, quoting=csv.QUOTE_ALL)
 
         for todo in todos:
             data = [user["id"], user["username"],
