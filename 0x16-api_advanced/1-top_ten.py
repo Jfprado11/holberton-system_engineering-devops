@@ -10,10 +10,13 @@ def top_ten(subreddit):
     headers = {"User-agent": "holbie"}
     data = requests.get("https://www.reddit.com/search.json",
                         params=params, headers=headers)
-    if data.status_code != 200:
+    if data.status_code == 200:
         data = data.json()
         posts = data["data"]["children"]
-        for post in posts:
-            print(post["data"]["title"])
+        if data["data"]["dist"] != 0:
+            for post in posts:
+                print(post["data"]["title"])
+        else:
+            print(None)
     else:
         print(None)
