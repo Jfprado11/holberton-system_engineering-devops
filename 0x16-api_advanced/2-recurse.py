@@ -4,7 +4,7 @@
 import requests
 
 
-def recurse(subreddit, hot_list=[], after=""):
+def recurse(subreddit, hot_list=[], after="", count=0):
     """recursive append the list"""
     params = {"limit": 1, "after": after}
     headers = {"User-agent": "holbie"}
@@ -15,10 +15,11 @@ def recurse(subreddit, hot_list=[], after=""):
         data = data.json()
         posts = data["data"]["children"]
         after = data["data"]["after"]
-        if after is not None:
+        try:
             hot_list.append(posts[0]["data"]["title"])
-            return recurse(subreddit, hot_list, after)
-        else:
+            count += 1
+            recurse(subreddit, hot_list, after, count)
+        except:
             return (hot_list)
     else:
         return(None)
