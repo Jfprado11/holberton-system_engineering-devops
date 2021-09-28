@@ -8,15 +8,16 @@ def top_ten(subreddit):
     """the ten hottest reddits"""
     params = {"q": subreddit, "sort": "hot", "limit": 10}
     headers = {"User-agent": "holbie"}
-    data = requests.get("https://www.reddit.com/search.json", allow_redirects=False,
+    data = requests.get("https://www.reddit.com/search.json",
+                        allow_redirects=False,
                         params=params, headers=headers)
     if data.status_code == 200:
         data = data.json()
         posts = data["data"]["children"]
-        if data["data"]["dist"] != 0:
+        if data["data"]["dist"] == 0:
+            print(None)
+        else:
             for post in posts:
                 print(post["data"]["title"])
-        else:
-            print(None)
     else:
         print(None)
