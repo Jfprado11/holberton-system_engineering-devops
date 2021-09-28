@@ -6,11 +6,12 @@ import requests
 
 def top_ten(subreddit):
     """the ten hottest reddits"""
-    params = {"q": subreddit, "sort": "hot", "limit": 10}
+    params = {"limit": 10}
     headers = {"User-agent": "holbie"}
-    data = requests.get("https://www.reddit.com/search.json",
-                        allow_redirects=False,
-                        params=params, headers=headers)
+    data = requests.get("https://www.reddit.com/r/{}/hot.json".format(
+        subreddit),
+        allow_redirects=False,
+        params=params, headers=headers)
     if data.status_code == 200:
         data = data.json()
         posts = data["data"]["children"]
