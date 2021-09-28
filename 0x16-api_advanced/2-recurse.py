@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """return the hot posts for subredist"""
 
 import requests
@@ -15,10 +15,10 @@ def recurse(subreddit, hot_list=[], after=""):
         data = data.json()
         posts = data["data"]["children"]
         after = data["data"]["after"]
-        try:
+        if after is not None:
             hot_list.append(posts[0]["data"]["title"])
             return recurse(subreddit, hot_list, after)
-        except:
+        else:
             return (hot_list)
     else:
         return(None)
