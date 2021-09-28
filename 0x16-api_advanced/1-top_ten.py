@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+"""print the title for 10 hot post"""
+
+import requests
+
+
+def top_ten(subreddit):
+    """the ten hottest reddits"""
+    params = {"q": subreddit, "sort": "hot", "limit": 10}
+    headers = {"User-agent": "holbie"}
+    try:
+        data = requests.get("https://www.reddit.com/search.json",
+                            params=params, headers=headers)
+        data = data.json()
+        posts = data["data"]["children"]
+        for post in posts:
+            print(post["data"]["title"])
+    except:
+        print(None)
